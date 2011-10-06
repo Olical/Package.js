@@ -8,5 +8,5 @@
  **/
 function Class(settings) {
 	// Initialise variables
-	var built = settings.constructor || new Function();
+	var built = settings.Constructor || new Function();
 }
