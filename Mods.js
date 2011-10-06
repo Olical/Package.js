@@ -9,4 +9,7 @@
 function Class(settings) {
 	// Initialise variables
 	var built = settings.Constructor || new Function();
+	
+	// Return the built class
+	return built;
 }
