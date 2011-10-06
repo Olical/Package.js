@@ -15,7 +15,7 @@ function Class(settings) {
 
 /**
  * Initialises the class
- * 
+ *
  * @param {Object} settings The settings to set up your class with such as what class to extend
  * @return {Function} The finished class
  **/
@@ -61,7 +61,7 @@ Class.prototype.initialise = function(settings) {
 
 /**
  * Implements an object into the class
- * 
+ *
  * @param {Object} obj Object to implement into the class
  **/
 Class.prototype.implement = function(obj) {
