@@ -17,7 +17,7 @@ function Class(settings) {
  * Initialises the class
  *
  * @param {Object} settings The settings to set up your class with such as what class to extend
- * @return {Function} The finished class
+ * @returns {Function} The finished class
  **/
 Class.prototype.initialise = function(settings) {
 	// Initialise required variables
@@ -60,6 +60,28 @@ Class.prototype.initialise = function(settings) {
 };
 
 /**
+ * Wraps a child method in another function so it can call this.parent();
+ *
+ * @param {Function} parent Method to place in this.parent();
+ * @param {Function} child The method to wrap inside the parent
+ **/
+Class.prototype.wrapMethod = function(parent, child) {
+	return function() {
+		// Set the parent
+		this.parent = parent;
+		
+		// Run the child
+		var response = child.apply(this, arguments);
+		
+		// Delete the parent
+		delete this.parent;
+		
+		// Return the response
+		return response;
+	};
+};
+
+/**
  * Implements an object into the class
  *
  * @param {Object} obj Object to implement into the class
@@ -71,7 +93,15 @@ Class.prototype.implement = function(obj) {
 	// Loop over the methods implementing them
 	for(key in obj) {
 		if(obj.hasOwnProperty(key)) {
-			this.built.prototype[key] = obj[key];
+			// If it already exists and both are functions we need to wrap the method to allow this.parent();
+			if(this.built.prototype[key] && typeof this.built.prototype[key] === 'function' && typeof obj[key] === 'function') {
+				// It does exist, wrap it
+				this.built.prototype[key] = this.wrapMethod(this.built.prototype[key], obj[key]);
+			}
+			else {
+				// It does not exist yet, implement it
+				this.built.prototype[key] = obj[key];
+			}
 		}
 	}
 };
