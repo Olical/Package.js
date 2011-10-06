@@ -31,18 +31,18 @@ Class.prototype.initialise = function(settings) {
 		this.implement(settings.Extends.prototype);
 	}
 	
-	// Implement any classes that need implementing
+	// Implement any objects that need implementing
 	if(settings.Implements) {
 		// If it is an array we need to loop over them
 		if(typeof settings.Implements === 'array') {
 			for(i = 0; i < settings.Implements.length; i += 1) {
-				// Implement the class
-				this.implement(settings.Implements[i].prototype);
+				// Implement the object
+				this.implement(settings.Implements[i]);
 			}
 		}
 		else {
-			// Implement the class
-			this.implement(settings.Implements.prototype);
+			// Implement the object
+			this.implement(settings.Implements);
 		}
 	}
 	
