@@ -7,9 +7,8 @@
  * Class - Can extend, implement and require other classes
  **/
 function Class(settings) {
-	// Initialise variables
-	var built = settings.Constructor || new Function(),
-		key = null;
+	// Store the constructor
+	this.built = settings.Constructor || new Function();
 	
 	// Clean up the settings
 	delete settings.Extends;
@@ -18,12 +17,25 @@ function Class(settings) {
 	delete settings.Constructor;
 	
 	// Implement the remaining methods
-	for(key in settings) {
-		if(settings.hasOwnProperty(key)) {
-			built.prototype[key] = settings[key];
-		}
-	}
+	this.implement(settings);
 	
 	// Return the built class
-	return built;
+	return this.built;
 }
+
+/**
+ * Implements an object into the class
+ * 
+ * @param {Object} obj Object to implement into the class
+ **/
+Class.prototype.implement = function(obj) {
+	// Initialise variables
+	var key = null;
+	
+	// Loop over the methods implementing them
+	for(key in obj) {
+		if(obj.hasOwnProperty(key)) {
+			this.built.prototype[key] = obj[key];
+		}
+	}
+};
