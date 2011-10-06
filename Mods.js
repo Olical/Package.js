@@ -23,6 +23,11 @@ Class.prototype.initialise = function(settings) {
 	// Store the constructor
 	this.built = settings.Constructor || new Function();
 	
+	// Implement the extendable class if one exists
+	if(settings.Extends) {
+		this.implement(settings.Extends.prototype);
+	}
+	
 	// Clean up the settings
 	delete settings.Extends;
 	delete settings.Implements;
