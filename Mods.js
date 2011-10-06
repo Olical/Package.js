@@ -50,7 +50,6 @@ Class.prototype.initialise = function(settings) {
 	delete settings.Extends;
 	delete settings.Implements;
 	delete settings.Requires;
-	delete settings.Constructor;
 	
 	// Implement the remaining methods
 	this.implement(settings);
@@ -67,11 +66,17 @@ Class.prototype.initialise = function(settings) {
  **/
 Class.prototype.wrapMethod = function(parent, child) {
 	return function() {
+		// Initialise variables
+		var self = this,
+			response = null;
+		
 		// Set the parent
-		this.parent = parent;
+		this.parent = function() {
+			return parent.apply(self, arguments);
+		};
 		
 		// Run the child
-		var response = child.apply(this, arguments);
+		response = child.apply(self, arguments);
 		
 		// Delete the parent
 		delete this.parent;
