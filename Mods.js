@@ -7,6 +7,18 @@
  * Class - Can extend, implement and require other classes
  **/
 function Class(settings) {
+	// If settings have been passed initialise the class
+	if(settings) {
+		return this.initialise(settings);
+	}
+}
+
+/**
+ * Initialises the class
+ * 
+ * @param {Object} settings The settings to set up your class with such as what class to extend
+ **/
+Class.prototype.initialise = function(settings) {
 	// Store the constructor
 	this.built = settings.Constructor || new Function();
 	
@@ -21,7 +33,7 @@ function Class(settings) {
 	
 	// Return the built class
 	return this.built;
-}
+};
 
 /**
  * Implements an object into the class
