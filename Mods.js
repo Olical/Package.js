@@ -71,7 +71,7 @@ Class.prototype.wrapMethod = function(parent, child) {
 			response = null;
 		
 		// Set the parent
-		this.parent = function() {
+		self.parent = function() {
 			return parent.apply(self, arguments);
 		};
 		
