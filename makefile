@@ -1,5 +1,5 @@
 src = src/
-files = 
+files = ${src}Class.js
 combined = Mods.js
 compiled = Mods.min.js
 
@@ -11,8 +11,9 @@ combine:
 	@@cat ${files} > ${combined}
 
 validate:
-	@@echo "Validating
+	@@echo "Validating"
 	@@node build/validate.js ${combined}
 
 compile:
-	java -jar build/compiler.jar --js ${combined} --js_output_file ${compiled}
+	@@echo "Compiling"
+	@@java -jar build/compiler.jar --js ${combined} --js_output_file ${compiled}
