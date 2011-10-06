@@ -1,19 +1,9 @@
-src = src/
-files = ${src}Class.js
-combined = Mods.js
-compiled = Mods.min.js
-
-default: combine validate compile
-develop: combine validate
-
-combine:
-	@@echo "Combining"
-	@@cat ${files} > ${combined}
+default: validate compile
 
 validate:
 	@@echo "Validating"
-	@@node build/validate.js ${combined}
+	@@node build/validate.js Mods.js
 
 compile:
 	@@echo "Compiling"
-	@@java -jar build/compiler.jar --js ${combined} --js_output_file ${compiled}
+	@@java -jar build/compiler.jar --js Mods.js --js_output_file Mods.min.js
