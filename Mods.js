@@ -20,12 +20,30 @@ function Class(settings) {
  * @return {Function} The finished class
  **/
 Class.prototype.initialise = function(settings) {
+	// Initialise required variables
+	var i = null;
+	
 	// Store the constructor
 	this.built = settings.Constructor || new Function();
 	
 	// Implement the extendable class if one exists
 	if(settings.Extends) {
 		this.implement(settings.Extends.prototype);
+	}
+	
+	// Implement any classes that need implementing
+	if(settings.Implements) {
+		// If it is an array we need to loop over them
+		if(typeof settings.Implements === 'array') {
+			for(i = 0; i < settings.Implements.length; i += 1) {
+				// Implement the class
+				this.implement(settings.Implements[i].prototype);
+			}
+		}
+		else {
+			// Implement the class
+			this.implement(settings.Implements.prototype);
+		}
 	}
 	
 	// Clean up the settings
