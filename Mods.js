@@ -79,7 +79,7 @@ Class.prototype.wrapMethod = function(parent, child) {
 		response = child.apply(self, arguments);
 		
 		// Delete the parent
-		delete this.parent;
+		delete self.parent;
 		
 		// Return the response
 		return response;
