@@ -117,4 +117,9 @@
 			}
 		}
 	};
+	
+	// Expose the variables
+	window.Structure = {
+		Class: Class
+	};
 }());
