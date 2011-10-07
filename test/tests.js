@@ -10,6 +10,18 @@ describe('Class', function () {
 		
 		expect(test.toCheck).toEqual(true);
 	});
+	
+	it('can have methods', function() {
+		var TestClass = new Class({
+			toCheck: function() {
+				return true;
+			}
+		});
+		
+		var test = new TestClass();
+		
+		expect(test.toCheck()).toEqual(true);
+	});
 });
 
 // Display HTML output
