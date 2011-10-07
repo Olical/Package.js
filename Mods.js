@@ -51,7 +51,7 @@ Class.prototype.initialise = function(settings) {
 	}
 	
 	// Clean up the settings
-	delete settings.Constructor
+	delete settings.Constructor;
 	delete settings.Extends;
 	delete settings.Implements;
 	delete settings.Requires;
