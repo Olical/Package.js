@@ -26,18 +26,18 @@
 			built = null;
 		
 		// Store the constructor
-		built = this.built = settings.Constructor || new Function();
+		this.built = settings.Constructor || new Function();
 		
 		// Implement the extendable class if one exists
 		if(settings.Extends) {
 			// Wrap the finished function in the extended one
-			built = this.wrapMethod(settings.Extends, built);
+			this.built = this.wrapMethod(settings.Extends, this.built);
 			
 			// Implement the specified classes prototype
 			this.implement(settings.Extends.prototype);
 		}
 		
-		// Implement any objects that need implementing
+		// Implement any classes that need implementing
 		if(settings.Implements) {
 			// If it is an array we need to loop over them
 			if(typeof settings.Implements === 'array') {
@@ -62,7 +62,7 @@
 		this.implement(settings);
 		
 		// Return the built class
-		return built;
+		return this.built;
 	};
 	
 	/**
