@@ -21,15 +21,16 @@ function Class(settings) {
  **/
 Class.prototype.initialise = function(settings) {
 	// Initialise required variables
-	var i = null;
+	var i = null,
+		built = null;
 	
 	// Store the constructor
-	this.built = settings.Constructor || new Function();
+	built = this.built = settings.Constructor || new Function();
 	
 	// Implement the extendable class if one exists
 	if(settings.Extends) {
 		// Wrap the finished function in the extended one
-		this.built = this.wrapMethod(settings.Extends, this.built);
+		built = this.wrapMethod(settings.Extends, built);
 		
 		// Implement the specified classes prototype
 		this.implement(settings.Extends.prototype);
@@ -60,7 +61,7 @@ Class.prototype.initialise = function(settings) {
 	this.implement(settings);
 	
 	// Return the built class
-	return this.built;
+	return built;
 };
 
 /**
