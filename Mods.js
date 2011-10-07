@@ -28,6 +28,10 @@ Class.prototype.initialise = function(settings) {
 	
 	// Implement the extendable class if one exists
 	if(settings.Extends) {
+		// Wrap the finished function in the extended one
+		this.built = this.wrapMethod(settings.Extends, this.built);
+		
+		// Implement the specified classes prototype
 		this.implement(settings.Extends.prototype);
 	}
 	
@@ -47,6 +51,7 @@ Class.prototype.initialise = function(settings) {
 	}
 	
 	// Clean up the settings
+	delete settings.Constructor
 	delete settings.Extends;
 	delete settings.Implements;
 	delete settings.Requires;
