@@ -1,6 +1,6 @@
 describe('Class', function () {
 	it('can be initialised', function() {
-		var TestClass = new Class({
+		var TestClass = new Structure.Class({
 			Constructor: function() {
 				this.toCheck = true;
 			}
@@ -12,7 +12,7 @@ describe('Class', function () {
 	});
 	
 	it('can have methods', function() {
-		var TestClass = new Class({
+		var TestClass = new Structure.Class({
 			toCheck: function() {
 				return true;
 			}

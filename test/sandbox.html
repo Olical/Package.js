@@ -10,13 +10,13 @@
 		<p>Sandbox for Structure.js. Use console.</p>
 		<script type='text/javascript' src='../Structure.js'></script>
 		<script type='text/javascript'>
-			var Animal = new Class({
+			var Animal = new Structure.Class({
 				Constructor: function(name) {
 					this.name = name;
 				}
 			});
 			
-			var Dog = new Class({
+			var Dog = new Structure.Class({
 				Extends: Animal,
 				Constructor: function(name) {
 					this.parent(name);
@@ -26,7 +26,7 @@
 				}
 			});
 			
-			var SmallDog = new Class({
+			var SmallDog = new Structure.Class({
 				Extends: Dog,
 				Constructor: function(name) {
 					this.parent(name);
