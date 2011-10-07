@@ -1,5 +1,5 @@
 /**
- * @preserve Mods.js - Add class and package support to the browser
+ * @preserve Structure.js - Add class and package support to the browser
  * Copyright 2011, Oliver Caldwell (olivercaldwell.co.uk)
  **/
 

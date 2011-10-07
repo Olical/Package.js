@@ -1,6 +1,6 @@
 # About
 
-Mods.js is a script to add class and package support to the browser. This allows you to create modular, reusable code in the browser, which is great for larger projects.
+Structure.js is a script to add class and package support to the browser. This allows you to create modular, reusable code in the browser, which is great for larger projects.
 
 It is built so that if a specified class is required and not currently loaded then it will attempt to load it. You can also load the specified classes when you require them.
 

@@ -2,8 +2,8 @@ default: validate compile
 
 validate:
 	@@echo "Validating"
-	@@node build/validate.js Mods.js
+	@@node build/validate.js Structure.js
 
 compile:
 	@@echo "Compiling"
-	@@java -jar build/compiler.jar --js Mods.js --js_output_file Mods.min.js
+	@@java -jar build/compiler.jar --js Structure.js --js_output_file Structure.min.js
