@@ -22,6 +22,39 @@ describe('Class', function () {
 		
 		expect(test.toCheck()).toEqual(true);
 	});
+	
+	it('can extend another class', function() {
+		var Animal = new Structure.Class({
+			Constructor: function(name) {
+				this.name = name;
+			}
+		});
+		
+		var Dog = new Structure.Class({
+			Extends: Animal,
+			Constructor: function(name) {
+				this.parent(name);
+			},
+			bark: function() {
+				return this.name + ' barked!';
+			}
+		});
+		
+		var SmallDog = new Structure.Class({
+			Extends: Dog,
+			Constructor: function(name) {
+				this.parent(name);
+			},
+			bark: function() {
+				return this.parent() + ' It was very quiet.';
+			}
+		});
+		
+		var test = new SmallDog('Gerty');
+		
+		expect(test.name).toEqual('Gerty');
+		expect(test.bark()).toEqual('Gerty barked! It was very quiet.');
+	});
 });
 
 // Display HTML output
