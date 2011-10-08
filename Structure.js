@@ -43,12 +43,12 @@
 			if(typeof settings.Implements === 'array') {
 				for(i = 0; i < settings.Implements.length; i += 1) {
 					// Implement the object
-					this.implement(settings.Implements[i]);
+					this.implement(settings.Implements[i].prototype);
 				}
 			}
 			else {
 				// Implement the object
-				this.implement(settings.Implements);
+				this.implement(settings.Implements.prototype);
 			}
 		}
 		
