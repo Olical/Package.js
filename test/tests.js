@@ -1,6 +1,6 @@
 describe('Class', function () {
 	it('can be initialised', function() {
-		var TestClass = new Structure.Class({
+		var TestClass = new Class({
 			Constructor: function() {
 				this.toCheck = true;
 			}
@@ -12,7 +12,7 @@ describe('Class', function () {
 	});
 	
 	it('can have methods', function() {
-		var TestClass = new Structure.Class({
+		var TestClass = new Class({
 			toCheck: function() {
 				return true;
 			}
@@ -24,13 +24,13 @@ describe('Class', function () {
 	});
 	
 	it('can extend another class', function() {
-		var Animal = new Structure.Class({
+		var Animal = new Class({
 			Constructor: function(name) {
 				this.name = name;
 			}
 		});
 		
-		var Dog = new Structure.Class({
+		var Dog = new Class({
 			Extends: Animal,
 			Constructor: function(name) {
 				this.parent(name);
@@ -40,7 +40,7 @@ describe('Class', function () {
 			}
 		});
 		
-		var SmallDog = new Structure.Class({
+		var SmallDog = new Class({
 			Extends: Dog,
 			Constructor: function(name) {
 				this.parent(name);
@@ -57,7 +57,7 @@ describe('Class', function () {
 	});
 	
 	it('can implement another class', function() {
-		var Persistance = new Structure.Class({
+		var Persistance = new Class({
 			save: function(key, value) {
 				localStorage.setItem(key, JSON.stringify(value));
 			},
@@ -69,7 +69,7 @@ describe('Class', function () {
 			}
 		});
 		
-		var PersistantObject = new Structure.Class({
+		var PersistantObject = new Class({
 			Implements: Persistance,
 			Constructor: function(name) {
 				this.name = name;
