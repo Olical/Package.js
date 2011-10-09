@@ -23,7 +23,8 @@
 	Class.prototype.initialise = function(settings) {
 		// Initialise required variables
 		var i = null,
-			built = null;
+			built = null,
+			self = this;
 		
 		// Store the constructor
 		this.built = settings.Constructor || new Function();
@@ -37,26 +38,38 @@
 			this.implement(settings.Extends.prototype);
 		}
 		
+		/**
+		 * Implements a classes prototype
+		 *
+		 * @param {Object} proto The prototype object to implement
+		 */
+		function implement(proto) {
+			// Wrap the constructor if there is one
+			if(proto.settings.Constructor) {
+				this.built = this.wrapMethod(proto.settings.Constructor, this.built);
+			}
+			
+			// Implement the prototype
+			self.implement(proto);
+		}
+		
 		// Implement any classes that need implementing
 		if(settings.Implements) {
 			// If it is an array we need to loop over them
 			if(typeof settings.Implements === 'array') {
 				for(i = 0; i < settings.Implements.length; i += 1) {
 					// Implement the object
-					this.implement(settings.Implements[i].prototype);
+					implement(settings.Implements[i].prototype);
 				}
 			}
 			else {
 				// Implement the object
-				this.implement(settings.Implements.prototype);
+				implement(settings.Implements.prototype);
 			}
 		}
 		
-		// Clean up the settings
-		delete settings.Constructor;
-		delete settings.Extends;
-		delete settings.Implements;
-		delete settings.Requires;
+		// Store the settings in the classes prototype
+		this.built.prototype.settings = settings;
 		
 		// Implement the remaining methods
 		this.implement(settings);
@@ -100,11 +113,12 @@
 	 **/
 	Class.prototype.implement = function(obj) {
 		// Initialise variables
-		var key = null;
+		var key = null,
+			ignore = 'Constructor Extends Implements Requires';
 		
 		// Loop over the methods implementing them
 		for(key in obj) {
-			if(obj.hasOwnProperty(key)) {
+			if(obj.hasOwnProperty(key) && ignore.indexOf(key) === -1) {
 				// If it already exists and both are functions we need to wrap the method to allow this.parent();
 				if(this.built.prototype[key] && typeof this.built.prototype[key] === 'function' && typeof obj[key] === 'function') {
 					// It does exist, wrap it
