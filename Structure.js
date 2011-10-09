@@ -119,7 +119,15 @@
 	};
 	
 	// Expose the variables
+	var key = null;
+	
 	window.Structure = {
 		Class: Class
 	};
+	
+	for(key in window.Structure) {
+		if(window.Structure.hasOwnProperty(key) && typeof window[key] === 'undefined') {
+			window[key] = window.Structure[key];
+		}
+	}
 }());
