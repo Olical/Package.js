@@ -133,5 +133,6 @@
 	};
 	
 	// Expose the variables
-	window.Class = Class;
+	var exports = exports || window;
+	exports.Class = Class;
 }());
