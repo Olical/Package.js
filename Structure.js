@@ -6,24 +6,21 @@
 (function(exports) {
 	/**
 	 * Class - Can extend, implement and require other classes
-	 * 
+	 *
 	 * @param {Object} options The settings to initialise the class with
 	 **/
 	function Class(options) {
+		// Initialise the new class
+		function built() {
+			// If there is a constructor, call it
+			if(options.Constructor) {
+				options.Constructor.apply(this, arguments);
+			}
+		}
 		
+		// Return the finished class
+		return built;
 	}
-	
-	Class.prototype.extendFunction = function() {
-		
-	};
-	
-	Class.prototype.implementConstructor = function() {
-		
-	};
-	
-	Class.prototype.implementMethods = function() {
-		
-	};
 	
 	// Expose the variables
 	exports.Class = Class;
