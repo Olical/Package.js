@@ -6,8 +6,10 @@
 (function(exports) {
 	/**
 	 * Class - Can extend, implement and require other classes
+	 * 
+	 * @param {Object} options The settings to initialise the class with
 	 **/
-	function Class() {
+	function Class(options) {
 		
 	}
 	
