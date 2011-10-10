@@ -16,12 +16,36 @@
 		 * Wraps a function in a parent function
 		 * Adds access to this.parent();
 		 *
-		 * @param {Function} wrap The child function to wrap
-		 * @param {Function} with The parent function to wrap with
+		 * @param {Function} child The child function to wrap
+		 * @param {Function} parent The parent function to wrap with
+		 * @param {Object} context Object to set this to in both child and parent
 		 * @return {Function} The wrapped child with access to this.parent();
 		 **/
-		function wrapFunction(wrap, with) {
+		function wrapFunction(child, parent, context) {
+			// Store the arguments and initialise variables
+			var args = arguments,
+				result = null;
 			
+			return function() {
+				// Child is what is called
+				// Parent is in the context
+				// Child is called with context
+				// Result is returned
+				
+				// First set parent in context
+				context.parent = function() {
+					parent.apply(context, arguments);
+				};
+				
+				// Call the child and store the result
+				result = child.apply(context, args);
+				
+				// Remove the parent from the context
+				delete context.parent;
+				
+				// Return the result
+				return result;
+			};
 		}
 		
 		/**
@@ -29,8 +53,9 @@
 		 *
 		 * @param {Object} methods The methods to implement
 		 * @param {Object} target The object to implement the methods into
+		 * @param {Object} context Context to wrap with
 		 **/
-		function implementMethods(methods, target) {
+		function implementMethods(methods, target, context) {
 			// Initialise variables
 			var key = null;
 			
@@ -42,7 +67,7 @@
 					// And it already exists
 					if(typeof methods[key] === 'function' && target[key]) {
 						// Wrap it
-						target[key] = wrapFunction(target[key], methods[key]);
+						target[key] = wrapFunction(target[key], methods[key], context);
 					}
 					else {
 						// Otherwise implement it
