@@ -11,6 +11,18 @@
 		
 	}
 	
+	Class.prototype.extendFunction = function() {
+		
+	};
+	
+	Class.prototype.implementConstructor = function() {
+		
+	};
+	
+	Class.prototype.implementMethods = function() {
+		
+	};
+	
 	// Expose the variables
 	exports.Class = Class;
 }(window || exports));
