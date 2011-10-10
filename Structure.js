@@ -11,6 +11,18 @@
 	 **/
 	function Class(options) {
 		/**
+		 * Wraps a function in a parent function
+		 * Adds access to this.parent();
+		 *
+		 * @param {Function} wrap The child function to wrap
+		 * @param {Function} with The parent function to wrap with
+		 * @return {Function} The wrapped child with access to this.parent();
+		 **/
+		function wrapFunction(wrap, with) {
+			
+		}
+		
+		/**
 		 * Implements methods into an object
 		 *
 		 * @param {Object} methods The methods to implement
@@ -26,9 +38,9 @@
 				if(methods.hasOwnProperty(key)) {
 					// If it is a function
 					// And it already exists
-					// Wrap it
 					if(typeof methods[key] === 'function' && target[key]) {
-						
+						// Wrap it
+						target[key] = wrapFunction(target[key], methods[key]);
 					}
 					else {
 						// Otherwise implement it
