@@ -35,6 +35,7 @@
 	
 	/**
 	 * Stores the root path
+	 * If no root path is set it will look at the global `window.packageRoot`
 	 *
 	 * @param {String} root The base path to the class. Such as `.` or `./assets/javascript/packages`
 	 **/
