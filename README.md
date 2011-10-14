@@ -1,6 +1,6 @@
 # About
 
-Structure.js is a script to add package support to the browser. This allows you to create modular, reusable code in the browser, which is great for larger projects.
+Package.js is a script to add package support to the browser, as you may have guessed from the name. This allows you to create modular, reusable code in the browser, which is great for larger projects.
 
 The packages must have a directory structure that matches their package string. So a package string of `graphics.canvas.Image` would be stored in `graphics/canvas/Image.js`.
 
