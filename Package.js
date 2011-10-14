@@ -20,6 +20,11 @@
 	}
 	
 	/**
+	 * Object for storing settings
+	 **/
+	Package.prototype.settings = {};
+	
+	/**
 	 * Stores the class path
 	 *
 	 * @param {String} path The packages path, for example `graphics.canvas.Image`
@@ -36,6 +41,27 @@
 	 **/
 	Package.prototype.setRoot = function(root) {
 		this.settings.root = root;
+	};
+	
+	/**
+	 * Sets a setting or settings depending on whether you pass a string or object
+	 **/
+	Package.prototype.set = function(target, value) {
+		// Initialise required variables
+		var key = null;
+		
+		// If the target is a string, just set it
+		// Otherwise it is an object, loop over setting the values
+		if(typeof target === 'string') {
+			this.settings[target] = value;
+		}
+		else {
+			for(key in target) {
+				if(target.hasOwnProperty(key)) {
+					this.set(key, target[key]);
+				}
+			}
+		}
 	};
 	
 	/**
