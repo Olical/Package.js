@@ -49,7 +49,11 @@
 	 * @param {Function} callback Function to be run on completion
 	 **/
 	Package.prototype.load = function(callback) {
+		// Get the root path. Either this.root, window.packageRoot or ''
+		var root = this.root || window.packageRoot || '';
 		
+		// Remove any trailing slashes from the root
+		root.replace(/\/$/, '');
 	};
 	
 	// Expose the variables
