@@ -25,7 +25,7 @@
 	 * @param {String} path The packages path, for example `graphics.canvas.Image`
 	 **/
 	Package.prototype.setPath = function(path) {
-		this.path = path;
+		this.settings.path = path;
 	};
 	
 	/**
@@ -35,7 +35,7 @@
 	 * @param {String} root The base path to the class. Such as `.` or `./assets/javascript/packages`
 	 **/
 	Package.prototype.setRoot = function(root) {
-		this.root = root;
+		this.settings.root = root;
 	};
 	
 	/**
@@ -45,7 +45,7 @@
 	 **/
 	Package.prototype.load = function(callback) {
 		// Get the root path. Either this.root, window.packageRoot or ''
-		var root = this.root || window.packageRoot || '';
+		var root = this.settings.root || window.packageRoot || '';
 		
 		// Remove any trailing slashes from the root
 		root.replace(/\/$/, '');
