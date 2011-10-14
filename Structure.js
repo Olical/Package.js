@@ -53,4 +53,4 @@
 	
 	// Expose the variables
 	exports.Package = Package;
-}(window || exports));
+}(window));
