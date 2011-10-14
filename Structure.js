@@ -6,5 +6,16 @@
  **/
 
 (function(exports) {
+	/**
+	 * Base package class
+	 *
+	 * @param {String} path The packages path, for example `graphics.canvas.Image`
+	 **/
+	function Package(path) {
+		// Store the path
+		this.path = path;
+	}
 	
+	// Expose the variables
+	exports.Package = Package;
 }(window || exports));
