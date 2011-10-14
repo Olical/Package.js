@@ -65,6 +65,14 @@
 	};
 	
 	/**
+	 * Retrieves a setting
+	 **/
+	Package.prototype.get = function(target) {
+		// Return the setting
+		return this.settings[target];
+	};
+	
+	/**
 	 * Loads the current package and calls the passed callback when done
 	 *
 	 * @param {Function} callback Function to be run on completion
