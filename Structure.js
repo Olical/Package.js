@@ -15,7 +15,7 @@
 		// Check for a passed path
 		if(path) {
 			// Store the path
-			this.storePath(path);
+			this.setPath(path);
 			
 			// If there is also a callback, load the package
 			if(callback) {
