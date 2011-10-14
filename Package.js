@@ -11,16 +11,11 @@
 	 *
 	 * @param {String} path The packages path, for example `graphics.canvas.Image`
 	 **/
-	function Package(path, callback) {
+	function Package(path) {
 		// Check for a passed path
 		if(path) {
 			// Store the path
 			this.setPath(path);
-			
-			// If there is also a callback, load the package
-			if(callback) {
-				this.load();
-			}
 		}
 	}
 	
