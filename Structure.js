@@ -34,6 +34,15 @@
 	};
 	
 	/**
+	 * Stores the root path
+	 *
+	 * @param {String} root The base path to the class. Such as `.` or `./assets/javascript/packages`
+	 **/
+	Package.prototype.setRoot = function(root) {
+		this.root = root;
+	};
+	
+	/**
 	 * Loads the current package and calls the passed callback when done
 	 *
 	 * @param {Function} callback Function to be run on completion
