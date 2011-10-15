@@ -62,7 +62,56 @@ But what if your script requires more than one script, say it has a list of depe
 		myScript.register();
 	});
 
-I hope this has been enough to get you going. If not, just have a look at the source and the API. You will be able to work out anything you need.
+I hope this has been enough to get you going. If not, just have a look at the source and the API. You will be able to work out anything you need. You may also find the examples section very helpful.
+
+# Examples
+
+## Main script
+
+	// Set the default package root
+	Package.defaultRoot = '/assets/javascript/packages';
+	
+	// Initialise the main scripts package
+	var mainScript = new Package({
+		path: 'myApp.mainScript',
+		dependencies: [
+			'frameworks.MooTools', // /assets/javascript/packages/frameworks/mootools.js
+			'myApp.classes.TweetLoader' // /assets/javascript/packages/myApp/classes/TweetLoader.js
+		]
+	}).loadDependencies(function() {
+		// Main scripts code goes here
+		
+		// Register the package
+		mainScript.register();
+	});
+
+## Class or general script to be used by main
+
+	// Initialise package
+	var TweetLoader = new Package('myApp.classes.TweetLoader');
+	
+	// Your code to be loaded here
+	
+	// Register the package
+	TweetLoader.register();
+
+## Converted framework to use as a package
+
+	// Initialise package
+	var mootools = new Package('frameworks.mootools');
+	
+	// Original code from framework here
+	
+	// Register the package
+	mootools.register();
+
+## Loading a package outside of the dependency array
+
+	// Register and load the package
+	var mootools = new Package('frameworks.mootools').load(function() {
+		// Code that uses the package here
+		// Because this will be called when it is loaded / when mootools.register() is called
+	});
 
 # API
 
