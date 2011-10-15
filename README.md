@@ -4,6 +4,18 @@ Package.js is a script to add package support to the browser, as you may have gu
 
 The packages must have a directory structure that matches their package string. So a package string of `graphics.canvas.Image` would be stored in `graphics/canvas/Image.js`.
 
+# Compatibility
+
+Package.js is tested and works in the following browsers.
+
+ * Chrome
+ * FireFox
+ * Safari
+ * Opera
+ * IE 5.5+
+
+I am sure it works in many more, but that is all I can get my hands on. All testing is done with [jasmine](http://pivotal.github.com/jasmine/).
+
 # Quickstart
 
 If you want to get going as fast as possible then have a skim over the API and follow the instructions below.
