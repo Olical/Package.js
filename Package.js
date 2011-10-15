@@ -69,8 +69,8 @@
 	 * @param {Function} callback Function to be run on completion
 	 **/
 	Package.prototype.load = function(callback) {
-		// Get the root path. Either this.root, window.packageRoot or ''
-		var root = this.settings.root || window.packageRoot || '';
+		// Get the root path. Either this.root, Package.defaultRoot or ''
+		var root = this.settings.root || Package.defaultRoot || '';
 		
 		// Remove any trailing slashes from the root
 		root.replace(/\/$/, '');
