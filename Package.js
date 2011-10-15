@@ -29,6 +29,11 @@
 	Package.prototype.settings = {};
 	
 	/**
+	 * Object for storing registered packages
+	 **/
+	Package.registeredPackages = {};
+	
+	/**
 	 * Sets a setting or settings depending on whether you pass a string or object
 	 *
 	 * @param {String|Object} target Either the name of the setting to set or an object of key value pairs to set
@@ -61,6 +66,21 @@
 	Package.prototype.get = function(target) {
 		// Return the setting
 		return this.settings[target];
+	};
+	
+	/**
+	 * Registers the package in the global object, Package.registeredPackages
+	 * Requires the path to have been set
+	 **/
+	Package.prototype.register = function() {
+		// Get the path
+		var path = this.get('path');
+		
+		// Make sure we have a path
+		if(path) {
+			// Register the package
+			Package.registeredPackages[path] = true;
+		}
 	};
 	
 	/**
