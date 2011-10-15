@@ -164,7 +164,8 @@
 			// Initialise variables
 			var root = null,
 				path = null,
-				url = null;
+				url = null,
+				script = new Script();
 			
 			// Get the root path. Either this.root, Package.defaultRoot or ''
 			root = instance.settings.root || Package.defaultRoot || '';
@@ -175,6 +176,14 @@
 			// Drop the root into the url and append it with the converted package path
 			// Also add .js onto the end
 			url = root + path.split('.').join('/') + '.js';
+			
+			// Now load the script
+			script.setPath(url).load(function() {
+				// If there is a callback, call it
+				if(callback) {
+					callback();
+				}
+			});
 			
 			// Return the instance to allow chaining
 			return instance;
