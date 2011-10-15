@@ -168,7 +168,7 @@
 	Package.prototype.load = function(callback) {
 		// Initialise variables
 		var root = null,
-			path = null,
+			path = this.get('path'),
 			url = null,
 			script = new Script();
 		
