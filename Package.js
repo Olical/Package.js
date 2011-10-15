@@ -172,6 +172,20 @@
 			tempPackage = null,
 			loadedCount = 0;
 		
+		/**
+		 * Callback for when the temporary package has loaded
+		 * Increments the count and calls the callback when required
+		 **/
+		function stateCheck() {
+			// Increment the loaded count
+			loadedCount += 1;
+			
+			// Check if we are done. If we are then call the callback
+			if(loadedCount === deps.length - 1) {
+				callback();
+			}
+		}
+		
 		// Only load them if there are some
 		// If there are no dependencies but there is a callback, just call it
 		if(deps) {
@@ -188,15 +202,7 @@
 				}
 				
 				// Load the package
-				tempPackage.load(function() {
-					// Increment the loaded count
-					loadedCount += 1;
-					
-					// Check if we are done. If we are then call the callback
-					if(loadedCount === deps.length - 1) {
-						callback();
-					}
-				});
+				tempPackage.load(stateCheck);
 			}
 		}
 		else if(!deps && callback) {
