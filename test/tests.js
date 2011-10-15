@@ -57,7 +57,7 @@ describe('Loading', function() {
 				loaded = true;
 			});
 		
-		waits(200);
+		waits(1000);
 		
 		runs(function() {
 			expect(Package.registeredPackages[path]).toEqual(true);
@@ -73,7 +73,7 @@ describe('Loading', function() {
 				loaded = true;
 			});
 		
-		waits(200);
+		waits(1000);
 		
 		runs(function() {
 			expect(Package.registeredPackages[path]).toEqual(true);
@@ -91,7 +91,7 @@ describe('Dependencies', function() {
 				loaded = true;
 			});
 		
-		waits(200);
+		waits(1000);
 		
 		runs(function() {
 			expect(Package.registeredPackages[path]).toEqual(true);
