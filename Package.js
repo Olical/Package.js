@@ -181,7 +181,7 @@
 			loadedCount += 1;
 			
 			// Check if we are done. If we are then call the callback
-			if(loadedCount === deps.length - 1) {
+			if(loadedCount === deps.length) {
 				callback();
 			}
 		}
