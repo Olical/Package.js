@@ -70,6 +70,9 @@
 	
 	/**
 	 * Retrieves a setting
+	 *
+	 * @param {String} target Name of the value to retrieve, such as `path`
+	 * @returns {Mixed} The value of the target
 	 **/
 	Package.prototype.get = function(target) {
 		// Return the setting
