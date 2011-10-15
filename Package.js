@@ -123,6 +123,7 @@
 	/**
 	 * Registers the package in the global object, Package.registeredPackages
 	 * Requires the path to have been set
+	 *
 	 * @returns {Object} Returns the instance to allow chaining
 	 **/
 	Package.prototype.register = function() {
