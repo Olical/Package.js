@@ -160,6 +160,55 @@
 	};
 	
 	/**
+	 * Loads all of the dependencies for a package
+	 *
+	 * @param {Function} callback Function to be run on completion
+	 * @returns {Object} Returns the instance to allow chaining
+	 **/
+	Package.prototype.loadDependencies = function(callback) {
+		// Initialise variavles
+		var deps = this.get('dependencies'),
+			i = null,
+			tempPackage = null,
+			loadedCount = 0;
+		
+		// Only load them if there are some
+		// If there are no dependencies but there is a callback, just call it
+		if(deps) {
+			// Loop over them creating packages for them
+			for(i = 0; i < deps.length; i += 1) {
+				// Initialise the temporary package
+				tempPackage = new Package(deps[i]);
+				
+				// If no root is set then inherit from the parent package
+				// deps[i] can be a string or object
+				if(!deps[i].root) {
+					// There is no root, so copy it from this one
+					tempPackage.set('root', this.get('root'));
+				}
+				
+				// Load the package
+				tempPackage.load(function() {
+					// Increment the loaded count
+					loadedCount += 1;
+					
+					// Check if we are done. If we are then call the callback
+					if(loadedCount === deps.length - 1) {
+						callback();
+					}
+				});
+			}
+		}
+		else if(!deps && callback) {
+			// Run the callback instantly
+			callback();
+		}
+		
+		// Return the instance to allow chaining
+		return this;
+	};
+	
+	/**
 	 * Loads the current package and calls the passed callback when done
 	 *
 	 * @param {Function} callback Function to be run on completion
