@@ -35,6 +35,21 @@ The API is taken from the JSDoc comments which you can find inside the source fi
   * **param** {Function} callback Function to be run on completion
   * **returns** {Object} Returns the instance to allow chaining
 
+A settings object can be passed to the set method or the constructor. Here is an example settings object.
+
+	packageInstance.set({
+		path: 'x.y.z',
+		root: './foo',
+		dependencies: [
+			'x.y.foo',
+			'x.y.bar'
+		]
+	});
+
+ * **path** - This is the path to the package to load or register. It must match the directory structure. So `graphics.canvas.Image` would point to `graphics/canvas/Image.js`
+ * **root** - This is the root path to load the package from, it will also be inherited by its dependencies. With a root of `./foo` the previous example would point to `./foo/graphics/canvas/Image.js`
+ * **dependencies** - This is an array of settings objects or string, it is passed to the constructor of the Package class, so works how you would expect. These will be loaded when you call `loadDependencies`
+
 # Author
 
 Written by [Oliver Caldwell](http://olivercaldwell.co.uk/).
