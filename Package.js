@@ -183,7 +183,7 @@
 			
 			// Drop the root into the url and append it with the converted package path
 			// Also add .js onto the end
-			url = root + path.split('.').join('/') + '.js';
+			url = root + '/' + path.split('.').join('/') + '.js';
 			
 			// Now load the script
 			script.setPath(url).load(function() {
