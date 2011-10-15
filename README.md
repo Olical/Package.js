@@ -4,6 +4,66 @@ Package.js is a script to add package support to the browser, as you may have gu
 
 The packages must have a directory structure that matches their package string. So a package string of `graphics.canvas.Image` would be stored in `graphics/canvas/Image.js`.
 
+# Quickstart
+
+If you want to get going as fast as possible then have a skim over the API and follow the instructions below.
+
+First things first, your going to need to include `Package.js` in your page, so download it and create a script tag to load it like so.
+
+	<script type='text/javascript' src='/path/to/Package.js'></script>
+
+You will also need a main script for you application, so create that and include it too. You can put all of your useful and cool code up the top of that file. The only thing you need to do is register your file.
+
+	// Fisrt things first, lets set the location of our packages
+	// This is not required, but saves passing the root to every package initialisation
+	Package.defaultRoot = '/assets/javascript/packages';
+	
+	// Now lets create the package instance
+	var myScript = new Package('myApp.myScript'); // You can also pass a settings object
+	
+	// Some epic JavaScript up here
+	// It does such cool stuff that you can even see it!
+	// Amazing right!?
+	
+	// And now at the bottom of the file we register our package
+	myScript.register();
+
+Now your script is registered, pretty easy right. But I would imagine that you will need to load another package for your script to work. You can do that like so.
+
+	var moreJs = new Package('myApp.moreJs').load(function() {
+		// Any code within this block can be assured that the script has loaded
+		// When you call register at the bottom of your script it runs this code block, so ALWAYS call it at the bottom
+	});
+
+But what if your script requires more than one script, say it has a list of dependencies. Well, theres an easy way around that. Here is the same script as before but with a dependency array.
+
+	// Fisrt things first, lets set the location of our packages
+	// This is not required, but saves passing the root to every package initialisation
+	Package.defaultRoot = '/assets/javascript/packages';
+	
+	// Now lets create the package instance
+	var myScript = new Package({
+		path: 'myApp.myScript',
+		dependencies: [
+			'libraries.mootools',
+			'libraries.jquery',
+			'classes.tweet'
+		]
+	}).loadDependencies(function() {
+		// Remember to place all code that requires the dependencies in this callback!
+		// And also remember to stick the register statement in here!
+		// I'm serious. Stuff will really start to break if you don't do what I say!
+		
+		// Some epic JavaScript up here
+		// It does such cool stuff that you can even see it!
+		// Amazing right!?
+		
+		// And now at the bottom of the file we register our package
+		myScript.register();
+	});
+
+I hope this has been enough to get you going. If not, just have a look at the source and the API. You will be able to work out anything you need.
+
 # API
 
 ## Methods
