@@ -1,5 +1,5 @@
 (function() {
-	var basic = new Package('tests.defaultRoot').register();
+	var defaultRoot = new Package('tests.defaultRoot').register();
 	
 	window.createdByDefaultRoot = true;
 }());
