@@ -55,7 +55,7 @@
 		script.type = 'text/javascript';
 		
 		// Inject the script into the head
-		document.head.appendChild(script);
+		document.getElementsByTagName('head')[0].appendChild(script);
 		
 		// Return the instance to allow chaining
 		return this;
