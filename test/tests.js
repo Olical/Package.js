@@ -35,6 +35,15 @@ describe('Settings', function() {
 	});
 });
 
+describe('Registering', function() {
+	it('can be registered', function() {
+		var path = 'tests.RegisterTest',
+			test = new Package(path).register();
+		
+		expect(Package.registeredPackages[path]).toEqual(true);
+	});
+});
+
 // Display HTML output
 var jasmineEnv = jasmine.getEnv();
 jasmineEnv.reporter = new jasmine.TrivialReporter();
