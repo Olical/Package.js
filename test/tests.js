@@ -15,6 +15,26 @@ describe('Initialisation', function() {
 	});
 });
 
+describe('Settings', function() {
+	it('can have a path set', function() {
+		var test = new Package().set('path', 'tests.MainTest');
+	});
+	
+	it('can have a path and root set', function() {
+		var test = new Package().set({
+			path: 'tests.MainTest',
+			root: '/assets/javascript/packages'
+		});
+	});
+	
+	it('can have its path retrived', function() {
+		var path = 'tests.MainTest',
+			test = new Package(path);
+		
+		expect(test.get('path')).toEqual(path);
+	});
+});
+
 // Display HTML output
 var jasmineEnv = jasmine.getEnv();
 jasmineEnv.reporter = new jasmine.TrivialReporter();
