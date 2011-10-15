@@ -40,6 +40,35 @@
 		 * @returns {Object} Returns the instance to allow chaining
 		 **/
 		instance.load = function(callback) {
+			// Create the new element
+			var script = document.createElement('script');
+			
+			// Set up the script element
+			script.src = instance.path;
+			script.type = 'text/javascript';
+			
+			// Make sure we have a callback before attatching events
+			if(callback) {
+				// Check if we have to use the IE version
+				if(typeof script.onreadystatechange !== 'undefined') {
+					// Wait for the onreadystatechange event
+					script.attachEvent('onreadystatechange', function() {
+						// When fired check the state
+						if(script.readyState === 'complete') {
+							// Because the state is complete we can call the callback
+							callback();
+						}
+					});
+				}
+				else {
+					// Wait for the load event
+					script.addEventListener('load', callback);
+				}
+			}
+			
+			// Inject the script into the head
+			document.head.appendChild(script);
+			
 			// Return the instance to allow chaining
 			return instance;
 		};
