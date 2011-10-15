@@ -57,6 +57,14 @@ describe('Loading', function() {
 				expect(createdByBasic).toEqual(true);
 			});
 	});
+	
+	it('can load another package using the defualt root', function() {
+		var path = 'tests.basic',
+			basic = new Package(path).load(function() {
+				expect(Package.registeredPackages[path]).toEqual(true);
+				expect(createdByBasic).toEqual(true);
+			});
+	});
 });
 
 // Display HTML output
