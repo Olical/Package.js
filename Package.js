@@ -178,12 +178,12 @@
 			// Get the root path. Either this.root, Package.defaultRoot or ''
 			root = this.settings.root || Package.defaultRoot || '';
 			
-			// Remove any trailing slashes from the root
-			root.replace(/\/$/, '');
+			// Remove any trailing slashes from the root and append one of them
+			root = root.replace(/\/$/, '') + '/';
 			
 			// Drop the root into the url and append it with the converted package path
 			// Also add .js onto the end
-			url = root + '/' + path.split('.').join('/') + '.js';
+			url = root + path.split('.').join('/') + '.js';
 			
 			// Now load the script
 			script.setPath(url).load(function() {
