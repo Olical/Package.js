@@ -48,26 +48,38 @@ describe('Registering', function() {
 
 describe('Loading', function() {
 	it('can load another package', function() {
-		waitsFor(function() {
-			var path = 'tests.basic',
-				basic = new Package({
-					path: path,
-					root: './packages'
-				}).load(function() {
-					expect(Package.registeredPackages[path]).toEqual(true);
-					expect(createdByBasic).toEqual(true);
-				});
-		}, 'tests.basic to load', 2000);
+		var path = 'tests.basic',
+			loaded = false,
+			basic = new Package({
+				path: path,
+				root: './packages'
+			}).load(function() {
+				loaded = true;
+			});
+		
+		waits(500);
+		
+		runs(function() {
+			expect(Package.registeredPackages[path]).toEqual(true);
+			expect(createdByBasic).toEqual(true);
+			expect(loaded).toEqual(true);
+		});
 	});
 	
 	it('can load another package using the defualt root', function() {
-		waitsFor(function() {
-			var path = 'tests.defaultRoot',
-				basic = new Package(path).load(function() {
-					expect(Package.registeredPackages[path]).toEqual(true);
-					expect(createdByDefaultRoot).toEqual(true);
-				});
-		}, 'tests.defaultRoot to load', 2000);
+		var path = 'tests.defaultRoot',
+			loaded = false,
+			basic = new Package(path).load(function() {
+				loaded = true;
+			});
+		
+		waits(500);
+		
+		runs(function() {
+			expect(Package.registeredPackages[path]).toEqual(true);
+			expect(createdByDefaultRoot).toEqual(true);
+			expect(loaded).toEqual(true);
+		});
 	});
 });
 
