@@ -12,6 +12,9 @@
 	 * @param {String|Object} settings This can either be the path string or a settings object to pass to the set method
 	 **/
 	function Package(settings) {
+		// Initialise the settings object
+		this.settings = {};
+		
 		// Check the settings type
 		if(typeof settings === 'string') {
 			// It is a string, set the path to it
@@ -22,11 +25,6 @@
 			this.set(settings);
 		}
 	}
-	
-	/**
-	 * Object for storing settings
-	 **/
-	Package.prototype.settings = {};
 	
 	/**
 	 * Object for storing registered packages
