@@ -9,6 +9,53 @@
 	'use strict';
 	
 	/**
+	 * Class for working with script elements
+	 * If both the path and callback are passed, load will be called
+	 *
+	 * @param {String} path Path to the script to load
+	 * @param {Function} callack Function to call when the script has loaded
+	 **/
+	function Script(path, callback) {
+		// Grab a copy of the instance
+		var instance = this;
+		
+		/**
+		 * Sets the path to the script to load
+		 *
+		 * @param {String} path The path to the script to load
+		 * @returns {Object} Returns the instance to allow chaining
+		 **/
+		instance.setPath = function(path) {
+			instance.path = path;
+			
+			// Return the instance to allow chaining
+			return instance;
+		};
+		
+		/**
+		 * Loads the script set with setPath
+		 * Calls the passed callback when done
+		 *
+		 * @param {Function} callback Function to call when done
+		 * @returns {Object} Returns the instance to allow chaining
+		 **/
+		instance.load = function(callback) {
+			// Return the instance to allow chaining
+			return instance;
+		};
+		
+		// If there is a path set it
+		if(path) {
+			instance.setPath(path);
+			
+			// If there is a callback and a path, call load
+			if(callback) {
+				instance.load(callback);
+			}
+		}
+	}
+	
+	/**
 	 * Base package class
 	 *
 	 * @param {String|Object} settings This can either be the path string or a settings object to pass to the set method
