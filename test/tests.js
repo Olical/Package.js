@@ -69,7 +69,7 @@ describe('Loading', function() {
 	it('can load another package using the defualt root', function() {
 		var path = 'tests.defaultRoot',
 			loaded = false,
-			basic = new Package(path).load(function() {
+			defaultRoot = new Package(path).load(function() {
 				loaded = true;
 			});
 		
@@ -78,6 +78,26 @@ describe('Loading', function() {
 		runs(function() {
 			expect(Package.registeredPackages[path]).toEqual(true);
 			expect(createdByDefaultRoot).toEqual(true);
+			expect(loaded).toEqual(true);
+		});
+	});
+});
+
+describe('Dependencies', function() {
+	it('can load a package which loads dependencies', function() {
+		var path = 'tests.hasDeps',
+			loaded = false,
+			hasDeps = new Package(path).load(function() {
+				loaded = true;
+			});
+		
+		waits(200);
+		
+		runs(function() {
+			expect(Package.registeredPackages[path]).toEqual(true);
+			expect(Package.registeredPackages['tests.deps.depOne']).toEqual(true);
+			expect(Package.registeredPackages['tests.deps.depTwo']).toEqual(true);
+			expect(dependencyValue).toEqual(30);
 			expect(loaded).toEqual(true);
 		});
 	});
