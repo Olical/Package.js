@@ -29,25 +29,6 @@
 	Package.prototype.settings = {};
 	
 	/**
-	 * Stores the class path
-	 *
-	 * @param {String} path The packages path, for example `graphics.canvas.Image`
-	 **/
-	Package.prototype.setPath = function(path) {
-		this.settings.path = path;
-	};
-	
-	/**
-	 * Stores the root path
-	 * If no root path is set it will look at the global `window.packageRoot`
-	 *
-	 * @param {String} root The base path to the class. Such as `.` or `./assets/javascript/packages`
-	 **/
-	Package.prototype.setRoot = function(root) {
-		this.settings.root = root;
-	};
-	
-	/**
 	 * Sets a setting or settings depending on whether you pass a string or object
 	 *
 	 * @param {String|Object} target Either the name of the setting to set or an object of key value pairs to set
