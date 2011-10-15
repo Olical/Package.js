@@ -18,7 +18,7 @@
 		var instance = this;
 		
 		// Initialise the settings object
-		this.settings = {};
+		instance.settings = {};
 		
 		/**
 		 * Sets a setting or settings depending on whether you pass a string or object
@@ -33,18 +33,18 @@
 			// If the target is a string, just set it
 			// Otherwise it is an object, loop over setting the values
 			if(typeof target === 'string') {
-				this.settings[target] = value;
+				instance.settings[target] = value;
 			}
 			else {
 				for(key in target) {
 					if(target.hasOwnProperty(key)) {
-						this.set(key, target[key]);
+						instance.set(key, target[key]);
 					}
 				}
 			}
 			
 			// Return this to allow chaining
-			return this;
+			return instance;
 		};
 		
 		/**
@@ -55,7 +55,7 @@
 		 **/
 		instance.get = function(target) {
 			// Return the setting
-			return this.settings[target];
+			return instance.settings[target];
 		};
 		
 		/**
@@ -64,7 +64,7 @@
 		 **/
 		instance.register = function() {
 			// Get the path
-			var path = this.get('path');
+			var path = instance.get('path');
 			
 			// Make sure we have a path
 			if(path) {
@@ -73,7 +73,7 @@
 			}
 			
 			// Return this to allow chaining
-			return this;
+			return instance;
 		};
 		
 		/**
@@ -83,23 +83,23 @@
 		 **/
 		instance.load = function(callback) {
 			// Get the root path. Either this.root, Package.defaultRoot or ''
-			var root = this.settings.root || Package.defaultRoot || '';
+			var root = instance.settings.root || Package.defaultRoot || '';
 			
 			// Remove any trailing slashes from the root
 			root.replace(/\/$/, '');
 			
 			// Return this to allow chaining
-			return this;
+			return instance;
 		};
 		
 		// Check the settings type
 		if(typeof settings === 'string') {
 			// It is a string, set the path to it
-			this.set('path', settings);
+			instance.set('path', settings);
 		}
 		else {
 			// It must be an object, pass it to the set method
-			this.set(settings);
+			instance.set(settings);
 		}
 	}
 	
