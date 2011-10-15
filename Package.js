@@ -134,11 +134,11 @@
 		if(path) {
 			// Register the package
 			Package.registeredPackages[path] = true;
-		}
-		
-		// If there is a registration callback, fire it
-		if(callback) {
-			callback();
+			
+			// If there is a registration callback, fire it
+			if(callback) {
+				callback();
+			}
 		}
 		
 		// Return the instance to allow chaining
