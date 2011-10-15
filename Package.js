@@ -72,6 +72,7 @@
 		 *
 		 * @param {String|Object} target Either the name of the setting to set or an object of key value pairs to set
 		 * @param {Mixed} value The value to set the target to if the target is a string
+		 * @returns {Object} Returns the instance to allow chaining
 		 **/
 		instance.set = function(target, value) {
 			// Initialise required variables
@@ -90,7 +91,7 @@
 				}
 			}
 			
-			// Return this to allow chaining
+			// Return the instance to allow chaining
 			return instance;
 		};
 		
@@ -108,6 +109,7 @@
 		/**
 		 * Registers the package in the global object, Package.registeredPackages
 		 * Requires the path to have been set
+		 * @returns {Object} Returns the instance to allow chaining
 		 **/
 		instance.register = function() {
 			// Get the path
@@ -119,7 +121,7 @@
 				Package.registeredPackages[path] = true;
 			}
 			
-			// Return this to allow chaining
+			// Return the instance to allow chaining
 			return instance;
 		};
 		
@@ -127,6 +129,7 @@
 		 * Loads the current package and calls the passed callback when done
 		 *
 		 * @param {Function} callback Function to be run on completion
+		 * @returns {Object} Returns the instance to allow chaining
 		 **/
 		instance.load = function(callback) {
 			// Get the root path. Either this.root, Package.defaultRoot or ''
@@ -135,7 +138,7 @@
 			// Remove any trailing slashes from the root
 			root.replace(/\/$/, '');
 			
-			// Return this to allow chaining
+			// Return the instance to allow chaining
 			return instance;
 		};
 		
