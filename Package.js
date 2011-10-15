@@ -14,8 +14,83 @@
 	 * @param {String|Object} settings This can either be the path string or a settings object to pass to the set method
 	 **/
 	function Package(settings) {
+		// Grab a copy of the instance
+		var instance = this;
+		
 		// Initialise the settings object
 		this.settings = {};
+		
+		/**
+		 * Sets a setting or settings depending on whether you pass a string or object
+		 *
+		 * @param {String|Object} target Either the name of the setting to set or an object of key value pairs to set
+		 * @param {Mixed} value The value to set the target to if the target is a string
+		 **/
+		instance.set = function(target, value) {
+			// Initialise required variables
+			var key = null;
+			
+			// If the target is a string, just set it
+			// Otherwise it is an object, loop over setting the values
+			if(typeof target === 'string') {
+				this.settings[target] = value;
+			}
+			else {
+				for(key in target) {
+					if(target.hasOwnProperty(key)) {
+						this.set(key, target[key]);
+					}
+				}
+			}
+			
+			// Return this to allow chaining
+			return this;
+		};
+		
+		/**
+		 * Retrieves a setting
+		 *
+		 * @param {String} target Name of the value to retrieve, such as `path`
+		 * @returns {Mixed} The value of the target
+		 **/
+		instance.get = function(target) {
+			// Return the setting
+			return this.settings[target];
+		};
+		
+		/**
+		 * Registers the package in the global object, Package.registeredPackages
+		 * Requires the path to have been set
+		 **/
+		instance.register = function() {
+			// Get the path
+			var path = this.get('path');
+			
+			// Make sure we have a path
+			if(path) {
+				// Register the package
+				Package.registeredPackages[path] = true;
+			}
+			
+			// Return this to allow chaining
+			return this;
+		};
+		
+		/**
+		 * Loads the current package and calls the passed callback when done
+		 *
+		 * @param {Function} callback Function to be run on completion
+		 **/
+		instance.load = function(callback) {
+			// Get the root path. Either this.root, Package.defaultRoot or ''
+			var root = this.settings.root || Package.defaultRoot || '';
+			
+			// Remove any trailing slashes from the root
+			root.replace(/\/$/, '');
+			
+			// Return this to allow chaining
+			return this;
+		};
 		
 		// Check the settings type
 		if(typeof settings === 'string') {
@@ -32,78 +107,6 @@
 	 * Object for storing registered packages
 	 **/
 	Package.registeredPackages = {};
-	
-	/**
-	 * Sets a setting or settings depending on whether you pass a string or object
-	 *
-	 * @param {String|Object} target Either the name of the setting to set or an object of key value pairs to set
-	 * @param {Mixed} value The value to set the target to if the target is a string
-	 **/
-	Package.prototype.set = function(target, value) {
-		// Initialise required variables
-		var key = null;
-		
-		// If the target is a string, just set it
-		// Otherwise it is an object, loop over setting the values
-		if(typeof target === 'string') {
-			this.settings[target] = value;
-		}
-		else {
-			for(key in target) {
-				if(target.hasOwnProperty(key)) {
-					this.set(key, target[key]);
-				}
-			}
-		}
-		
-		// Return this to allow chaining
-		return this;
-	};
-	
-	/**
-	 * Retrieves a setting
-	 *
-	 * @param {String} target Name of the value to retrieve, such as `path`
-	 * @returns {Mixed} The value of the target
-	 **/
-	Package.prototype.get = function(target) {
-		// Return the setting
-		return this.settings[target];
-	};
-	
-	/**
-	 * Registers the package in the global object, Package.registeredPackages
-	 * Requires the path to have been set
-	 **/
-	Package.prototype.register = function() {
-		// Get the path
-		var path = this.get('path');
-		
-		// Make sure we have a path
-		if(path) {
-			// Register the package
-			Package.registeredPackages[path] = true;
-		}
-		
-		// Return this to allow chaining
-		return this;
-	};
-	
-	/**
-	 * Loads the current package and calls the passed callback when done
-	 *
-	 * @param {Function} callback Function to be run on completion
-	 **/
-	Package.prototype.load = function(callback) {
-		// Get the root path. Either this.root, Package.defaultRoot or ''
-		var root = this.settings.root || Package.defaultRoot || '';
-		
-		// Remove any trailing slashes from the root
-		root.replace(/\/$/, '');
-		
-		// Return this to allow chaining
-		return this;
-	};
 	
 	// Expose the variables
 	exports.Package = Package;
