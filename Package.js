@@ -16,73 +16,70 @@
 	 * @param {Function} callack Function to call when the script has loaded
 	 **/
 	function Script(path, callback) {
-		// Grab a copy of the instance
-		var instance = this;
-		
-		/**
-		 * Sets the path to the script to load
-		 *
-		 * @param {String} path The path to the script to load
-		 * @returns {Object} Returns the instance to allow chaining
-		 **/
-		instance.setPath = function(path) {
-			instance.path = path;
-			
-			// Return the instance to allow chaining
-			return instance;
-		};
-		
-		/**
-		 * Loads the script set with setPath
-		 * Calls the passed callback when done
-		 *
-		 * @param {Function} callback Function to call when done
-		 * @returns {Object} Returns the instance to allow chaining
-		 **/
-		instance.load = function(callback) {
-			// Create the new element
-			var script = document.createElement('script');
-			
-			// Set up the script element
-			script.src = instance.path;
-			script.type = 'text/javascript';
-			
-			// Make sure we have a callback before attatching events
-			if(callback) {
-				// Check if we have to use the IE version
-				if(typeof script.onreadystatechange !== 'undefined') {
-					// Wait for the onreadystatechange event
-					script.attachEvent('onreadystatechange', function() {
-						// When fired check the state
-						if(script.readyState === 'complete') {
-							// Because the state is complete we can call the callback
-							callback();
-						}
-					});
-				}
-				else {
-					// Wait for the load event
-					script.addEventListener('load', callback);
-				}
-			}
-			
-			// Inject the script into the head
-			document.head.appendChild(script);
-			
-			// Return the instance to allow chaining
-			return instance;
-		};
-		
 		// If there is a path set it
 		if(path) {
-			instance.setPath(path);
+			this.setPath(path);
 			
 			// If there is a callback and a path, call load
 			if(callback) {
-				instance.load(callback);
+				this.load(callback);
 			}
 		}
 	}
+	
+	/**
+	 * Sets the path to the script to load
+	 *
+	 * @param {String} path The path to the script to load
+	 * @returns {Object} Returns the instance to allow chaining
+	 **/
+	Script.prototype.setPath = function(path) {
+		this.path = path;
+		
+		// Return the instance to allow chaining
+		return this;
+	};
+	
+	/**
+	 * Loads the script set with setPath
+	 * Calls the passed callback when done
+	 *
+	 * @param {Function} callback Function to call when done
+	 * @returns {Object} Returns the instance to allow chaining
+	 **/
+	Script.prototype.load = function(callback) {
+		// Create the new element
+		var script = document.createElement('script');
+		
+		// Set up the script element
+		script.src = this.path;
+		script.type = 'text/javascript';
+		
+		// Make sure we have a callback before attatching events
+		if(callback) {
+			// Check if we have to use the IE version
+			if(typeof script.onreadystatechange !== 'undefined') {
+				// Wait for the onreadystatechange event
+				script.attachEvent('onreadystatechange', function() {
+					// When fired check the state
+					if(script.readyState === 'complete') {
+						// Because the state is complete we can call the callback
+						callback();
+					}
+				});
+			}
+			else {
+				// Wait for the load event
+				script.addEventListener('load', callback);
+			}
+		}
+		
+		// Inject the script into the head
+		document.head.appendChild(script);
+		
+		// Return the instance to allow chaining
+		return this;
+	};
 	
 	/**
 	 * Base package class
