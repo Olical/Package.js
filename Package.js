@@ -178,8 +178,10 @@
 			// Get the root path. Either this.root, Package.defaultRoot or ''
 			root = this.settings.root || Package.defaultRoot || '';
 			
-			// Remove any trailing slashes from the root and append one of them
-			root = root.replace(/\/$/, '') + '/';
+			// Add a trailing slash if required
+			if(root[root.length - 1] !== '/') {
+				root += '/';
+			}
 			
 			// Drop the root into the url and append it with the converted package path
 			// Also add .js onto the end
