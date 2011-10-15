@@ -44,35 +44,15 @@
 	 * Loads the script set with setPath
 	 * Calls the passed callback when done
 	 *
-	 * @param {Function} callback Function to call when done
 	 * @returns {Object} Returns the instance to allow chaining
 	 **/
-	Script.prototype.load = function(callback) {
+	Script.prototype.load = function() {
 		// Create the new element
 		var script = document.createElement('script');
 		
 		// Set up the script element
 		script.src = this.path;
 		script.type = 'text/javascript';
-		
-		// Make sure we have a callback before attatching events
-		if(callback) {
-			// Check if we have to use the IE version
-			if(typeof script.onreadystatechange !== 'undefined') {
-				// Wait for the onreadystatechange event
-				script.attachEvent('onreadystatechange', function() {
-					// When fired check the state
-					if(script.readyState === 'complete') {
-						// Because the state is complete we can call the callback
-						callback();
-					}
-				});
-			}
-			else {
-				// Wait for the load event
-				script.addEventListener('load', callback);
-			}
-		}
 		
 		// Inject the script into the head
 		document.head.appendChild(script);
@@ -186,8 +166,8 @@
 			// Increment the loaded count
 			loadedCount += 1;
 			
-			// Check if we are done. If we are then call the callback
-			if(loadedCount === deps.length) {
+			// Check if we are done. If we are then call the callback if there is one
+			if(loadedCount === deps.length && callback) {
 				callback();
 			}
 		}
@@ -248,13 +228,13 @@
 			// Also add .js onto the end
 			url = root + path.split('.').join('/') + '.js';
 			
+			// Set the load callback if a callback was passed
+			if(callback) {
+				Package.registrationCallbacks[path] = callback;
+			}
+			
 			// Now load the script
-			script.setPath(url).load(function() {
-				// If there is a callback, call it
-				if(callback) {
-					callback();
-				}
-			});
+			script.setPath(url).load();
 		}
 		else if(Package.registeredPackages[path] && callback) {
 			// Already loaded, call the callback

@@ -7,5 +7,6 @@
 		]
 	}).loadDependencies(function() {
 		window.dependencyValue = depOneValue + depTwoValue; // 30
-	}).register();
+		hasDeps.register();
+	});
 }());
