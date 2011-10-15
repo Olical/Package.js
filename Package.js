@@ -6,6 +6,8 @@
  **/
 
 (function(exports) {
+	'use strict';
+	
 	/**
 	 * Base package class
 	 *
