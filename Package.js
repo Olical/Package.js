@@ -49,6 +49,9 @@
 	
 	/**
 	 * Sets a setting or settings depending on whether you pass a string or object
+	 *
+	 * @param {String|Object} target Either the name of the setting to set or an object of key value pairs to set
+	 * @param {Mixed} value The value to set the target to if the target is a string
 	 **/
 	Package.prototype.set = function(target, value) {
 		// Initialise required variables
