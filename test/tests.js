@@ -1,3 +1,5 @@
+Package.defaultRoot = './packages';
+
 describe('Initialisation', function() {
 	it('can be initialised', function() {
 		var test = new Package();
@@ -41,6 +43,19 @@ describe('Registering', function() {
 			test = new Package(path).register();
 		
 		expect(Package.registeredPackages[path]).toEqual(true);
+	});
+});
+
+describe('Loading', function() {
+	it('can load another package', function() {
+		var path = 'tests.basic',
+			basic = new Package({
+				path: path,
+				root: './packages'
+			}).load(function() {
+				expect(Package.registeredPackages[path]).toEqual(true);
+				expect(createdByBasic).toEqual(true);
+			});
 	});
 });
 
