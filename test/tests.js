@@ -54,7 +54,7 @@ describe('Loading', function() {
 					path: path,
 					root: './packages'
 				}).load(function() {
-						expect(Package.registeredPackages[path]).toEqual(true);
+					expect(Package.registeredPackages[path]).toEqual(true);
 					expect(createdByBasic).toEqual(true);
 				});
 		}, 'tests.basic to load', 2000);
