@@ -161,11 +161,20 @@
 		 * @returns {Object} Returns the instance to allow chaining
 		 **/
 		instance.load = function(callback) {
+			// Initialise variables
+			var root = null,
+				path = null,
+				url = null;
+			
 			// Get the root path. Either this.root, Package.defaultRoot or ''
-			var root = instance.settings.root || Package.defaultRoot || '';
+			root = instance.settings.root || Package.defaultRoot || '';
 			
 			// Remove any trailing slashes from the root
 			root.replace(/\/$/, '');
+			
+			// Drop the root into the url and append it with the converted package path
+			// Also add .js onto the end
+			url = root + path.split('.').join('/') + '.js';
 			
 			// Return the instance to allow chaining
 			return instance;
