@@ -6,6 +6,8 @@ The packages must have a directory structure that matches their package string. 
 
 # API
 
+## Methods
+
 The following list is a list of methods available to instances of the Package class. You can create a new instance like so.
 
 	var packageInstance = new Package();
@@ -34,6 +36,8 @@ The API is taken from the JSDoc comments which you can find inside the source fi
  * `packageInstance.load(callback)` - Loads the current package and calls the passed callback when done
   * **param** {Function} callback Function to be run on completion
   * **returns** {Object} Returns the instance to allow chaining
+
+## Settings
 
 A settings object can be passed to the set method or the constructor. Here is an example settings object.
 
