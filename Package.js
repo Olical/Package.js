@@ -55,6 +55,9 @@
 				}
 			}
 		}
+		
+		// Return this to allow chaining
+		return this;
 	};
 	
 	/**
@@ -81,6 +84,9 @@
 			// Register the package
 			Package.registeredPackages[path] = true;
 		}
+		
+		// Return this to allow chaining
+		return this;
 	};
 	
 	/**
@@ -94,6 +100,9 @@
 		
 		// Remove any trailing slashes from the root
 		root.replace(/\/$/, '');
+		
+		// Return this to allow chaining
+		return this;
 	};
 	
 	// Expose the variables
