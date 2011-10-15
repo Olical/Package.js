@@ -59,10 +59,10 @@ describe('Loading', function() {
 	});
 	
 	it('can load another package using the defualt root', function() {
-		var path = 'tests.basic',
+		var path = 'tests.defaultRoot',
 			basic = new Package(path).load(function() {
 				expect(Package.registeredPackages[path]).toEqual(true);
-				expect(createdByBasic).toEqual(true);
+				expect(createdByDefaultRoot).toEqual(true);
 			});
 	});
 });
