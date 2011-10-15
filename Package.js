@@ -9,13 +9,17 @@
 	/**
 	 * Base package class
 	 *
-	 * @param {String} path The packages path, for example `graphics.canvas.Image`
+	 * @param {String|Object} settings This can either be the path string or a settings object to pass to the set method
 	 **/
-	function Package(path) {
-		// Check for a passed path
-		if(path) {
-			// Store the path
-			this.setPath(path);
+	function Package(settings) {
+		// Check the settings type
+		if(typeof settings === 'string') {
+			// It is a string, set the path to it
+			this.set('path', settings);
+		}
+		else {
+			// It must be an object, pass it to the set method
+			this.set(settings);
 		}
 	}
 	
