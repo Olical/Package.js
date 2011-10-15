@@ -87,115 +87,112 @@
 	 * @param {String|Object} settings This can either be the path string or a settings object to pass to the set method
 	 **/
 	function Package(settings) {
-		// Grab a copy of the instance
-		var instance = this;
-		
 		// Initialise the settings object
-		instance.settings = {};
-		
-		/**
-		 * Sets a setting or settings depending on whether you pass a string or object
-		 *
-		 * @param {String|Object} target Either the name of the setting to set or an object of key value pairs to set
-		 * @param {Mixed} value The value to set the target to if the target is a string
-		 * @returns {Object} Returns the instance to allow chaining
-		 **/
-		instance.set = function(target, value) {
-			// Initialise required variables
-			var key = null;
-			
-			// If the target is a string, just set it
-			// Otherwise it is an object, loop over setting the values
-			if(typeof target === 'string') {
-				instance.settings[target] = value;
-			}
-			else {
-				for(key in target) {
-					if(target.hasOwnProperty(key)) {
-						instance.set(key, target[key]);
-					}
-				}
-			}
-			
-			// Return the instance to allow chaining
-			return instance;
-		};
-		
-		/**
-		 * Retrieves a setting
-		 *
-		 * @param {String} target Name of the value to retrieve, such as `path`
-		 * @returns {Mixed} The value of the target
-		 **/
-		instance.get = function(target) {
-			// Return the setting
-			return instance.settings[target];
-		};
-		
-		/**
-		 * Registers the package in the global object, Package.registeredPackages
-		 * Requires the path to have been set
-		 * @returns {Object} Returns the instance to allow chaining
-		 **/
-		instance.register = function() {
-			// Get the path
-			var path = instance.get('path');
-			
-			// Make sure we have a path
-			if(path) {
-				// Register the package
-				Package.registeredPackages[path] = true;
-			}
-			
-			// Return the instance to allow chaining
-			return instance;
-		};
-		
-		/**
-		 * Loads the current package and calls the passed callback when done
-		 *
-		 * @param {Function} callback Function to be run on completion
-		 * @returns {Object} Returns the instance to allow chaining
-		 **/
-		instance.load = function(callback) {
-			// Initialise variables
-			var root = null,
-				path = null,
-				url = null,
-				script = new Script();
-			
-			// Get the root path. Either this.root, Package.defaultRoot or ''
-			root = instance.settings.root || Package.defaultRoot || '';
-			
-			// Remove any trailing slashes from the root
-			root.replace(/\/$/, '');
-			
-			// Drop the root into the url and append it with the converted package path
-			// Also add .js onto the end
-			url = root + path.split('.').join('/') + '.js';
-			
-			// Now load the script
-			script.setPath(url).load(function() {
-				// If there is a callback, call it
-				if(callback) {
-					callback();
-				}
-			});
-			
-			// Return the instance to allow chaining
-			return instance;
-		};
+		this.settings = {};
 		
 		// Check the settings type
 		if(typeof settings === 'string') {
 			// It is a string, set the path to it
-			instance.set('path', settings);
+			this.set('path', settings);
 		}
 		else {
 			// It must be an object, pass it to the set method
-			instance.set(settings);
+			this.set(settings);
 		}
 	}
+	
+	/**
+	 * Sets a setting or settings depending on whether you pass a string or object
+	 *
+	 * @param {String|Object} target Either the name of the setting to set or an object of key value pairs to set
+	 * @param {Mixed} value The value to set the target to if the target is a string
+	 * @returns {Object} Returns the instance to allow chaining
+	 **/
+	Package.prototype.set = function(target, value) {
+		// Initialise required variables
+		var key = null;
+		
+		// If the target is a string, just set it
+		// Otherwise it is an object, loop over setting the values
+		if(typeof target === 'string') {
+			this.settings[target] = value;
+		}
+		else {
+			for(key in target) {
+				if(target.hasOwnProperty(key)) {
+					this.set(key, target[key]);
+				}
+			}
+		}
+		
+		// Return the instance to allow chaining
+		return this;
+	};
+	
+	/**
+	 * Retrieves a setting
+	 *
+	 * @param {String} target Name of the value to retrieve, such as `path`
+	 * @returns {Mixed} The value of the target
+	 **/
+	Package.prototype.get = function(target) {
+		// Return the setting
+		return this.settings[target];
+	};
+	
+	/**
+	 * Registers the package in the global object, Package.registeredPackages
+	 * Requires the path to have been set
+	 * @returns {Object} Returns the instance to allow chaining
+	 **/
+	Package.prototype.register = function() {
+		// Get the path
+		var path = this.get('path');
+		
+		// Make sure we have a path
+		if(path) {
+			// Register the package
+			Package.registeredPackages[path] = true;
+		}
+		
+		// Return the instance to allow chaining
+		return this;
+	};
+	
+	/**
+	 * Loads the current package and calls the passed callback when done
+	 *
+	 * @param {Function} callback Function to be run on completion
+	 * @returns {Object} Returns the instance to allow chaining
+	 **/
+	Package.prototype.load = function(callback) {
+		// Initialise variables
+		var root = null,
+			path = null,
+			url = null,
+			script = new Script();
+		
+		// Get the root path. Either this.root, Package.defaultRoot or ''
+		root = this.settings.root || Package.defaultRoot || '';
+		
+		// Remove any trailing slashes from the root
+		root.replace(/\/$/, '');
+		
+		// Drop the root into the url and append it with the converted package path
+		// Also add .js onto the end
+		url = root + path.split('.').join('/') + '.js';
+		
+		// Now load the script
+		script.setPath(url).load(function() {
+			// If there is a callback, call it
+			if(callback) {
+				callback();
+			}
+		});
+		
+		// Return the instance to allow chaining
+		return this;
+	};
 	
 	/**
 	 * Object for storing registered packages
