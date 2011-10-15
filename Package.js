@@ -147,12 +147,18 @@
 	 **/
 	Package.prototype.register = function() {
 		// Get the path
-		var path = this.get('path');
+		var path = this.get('path'),
+			callback = Package.registrationCallbacks[path];
 		
 		// Make sure we have a path
 		if(path) {
 			// Register the package
 			Package.registeredPackages[path] = true;
+		}
+		
+		// If there is a registration callback, fire it
+		if(callback) {
+			callback();
 		}
 		
 		// Return the instance to allow chaining
@@ -263,6 +269,11 @@
 	 * Object for storing registered packages
 	 **/
 	Package.registeredPackages = {};
+	
+	/**
+	 * Object for storing functions to call on registration
+	 **/
+	Package.registrationCallbacks = {};
 	
 	// Expose the variables
 	exports.Package = Package;
