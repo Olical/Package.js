@@ -8,7 +8,7 @@ The packages must have a directory structure that matches their package string. 
 
 The following list is a list of methods available to instances of the Package class. You can create a new instance like so.
 
-    var packageInstance = new Package();
+	var packageInstance = new Package();
 
 The API is taken from the JSDoc comments which you can find inside the source file.
 
