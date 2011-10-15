@@ -48,22 +48,26 @@ describe('Registering', function() {
 
 describe('Loading', function() {
 	it('can load another package', function() {
-		var path = 'tests.basic',
-			basic = new Package({
-				path: path,
-				root: './packages'
-			}).load(function() {
-				expect(Package.registeredPackages[path]).toEqual(true);
-				expect(createdByBasic).toEqual(true);
-			});
+		waitsFor(function() {
+			var path = 'tests.basic',
+				basic = new Package({
+					path: path,
+					root: './packages'
+				}).load(function() {
+						expect(Package.registeredPackages[path]).toEqual(true);
+					expect(createdByBasic).toEqual(true);
+				});
+		}, 'tests.basic to load', 2000);
 	});
 	
 	it('can load another package using the defualt root', function() {
-		var path = 'tests.defaultRoot',
-			basic = new Package(path).load(function() {
-				expect(Package.registeredPackages[path]).toEqual(true);
-				expect(createdByDefaultRoot).toEqual(true);
-			});
+		waitsFor(function() {
+			var path = 'tests.defaultRoot',
+				basic = new Package(path).load(function() {
+					expect(Package.registeredPackages[path]).toEqual(true);
+					expect(createdByDefaultRoot).toEqual(true);
+				});
+		}, 'tests.defaultRoot to load', 2000);
 	});
 });
 
