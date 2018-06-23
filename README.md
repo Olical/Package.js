@@ -14,7 +14,7 @@ Package.js is tested and works in the following browsers.
  * Opera
  * IE 5.5+
 
-I am sure it works in many more, but that is all I can get my hands on. All testing is done with [jasmine](http://pivotal.github.com/jasmine/).
+I am sure it works in many more, but that is all I can get my hands on. All testing is done with [jasmine](https://jasmine.github.io/).
 
 # Quickstart
 
